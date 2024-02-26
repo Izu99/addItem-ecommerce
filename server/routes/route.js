@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const imageController = require('../controllers/addItemController');
+const addItemController = require('../controllers/addItemController');
 
-router.use('/images', imageController);
+router.use('/items', addItemController);
 
 module.exports = router;
