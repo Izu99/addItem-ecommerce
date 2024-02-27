@@ -9,9 +9,11 @@ import {
 	uploadImageFailure,
 	resetState,
 } from "../store/slices/itemSlice";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
+import firebaseconfig from "../firebaseConfig";
 import sample_image from "../images/placeholder-image.jpg";
 
 const AddItem = () => {
@@ -27,15 +29,15 @@ const AddItem = () => {
 	});
 
 	const handleFileChange = (e) => {
-		setSelectedFile(e.target.files[0]);
+        setSelectedFile(e.target.files[0]);
 
-		// Read and display the selected image
-		const reader = new FileReader();
-		reader.onloadend = () => {
-			setImageUrl(reader.result);
-		};
-		reader.readAsDataURL(e.target.files[0]);
-	};
+        // Read and display the selected image
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImageUrl(reader.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
 
 	const handleChange = (e) => {
 		setInputs({
@@ -65,6 +67,7 @@ const AddItem = () => {
 				};
 
 				const res = await axios.post("http://localhost:5000/items", itemData);
+			
 			} catch (error) {
 				dispatch(uploadImageFailure(error.message));
 				console.error("Error:", error);
@@ -124,9 +127,9 @@ const AddItem = () => {
 								<option value='' disabled>
 									Select Category
 								</option>
-								<option value='Es001'>solar</option>
-								<option value='ER022'>bags</option>
-								<option value='AS001'>shoes</option>
+								<option value='Es001'>One</option>
+								<option value='ER022'>Two</option>
+								<option value='AS001'>Three</option>
 							</select>
 
 							<select
@@ -137,9 +140,9 @@ const AddItem = () => {
 								<option value='' disabled>
 									Select Sub Category
 								</option>
-								<option value='ES001'>ES001</option>
-								<option value='ER022'>ER022</option>
-								<option value='AS001'>AS001</option>
+								<option value='Es001'>One</option>
+								<option value='ER022'>Two</option>
+								<option value='AS001'>Three</option>
 							</select>
 						</div>
 					</div>
